@@ -17,7 +17,7 @@ CLUBS = chr(9827) # Character 9827 is '♣'.
 BACKSIDE = 'backside'
 
 def main():
-    print('''Blackjack, by Al Sweigart al@inventwithpython.com
+    print('''Lets play a game of blackjack with the AI dealer!
 
     Rules:
       Try to get as close to 21 without going over.
