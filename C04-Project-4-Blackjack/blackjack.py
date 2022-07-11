@@ -17,7 +17,7 @@ CLUBS = chr(9827) # Character 9827 is '♣'.
 BACKSIDE = 'backside'
 
 def main():
-    print('''Lets play a game of blackjack with the AI dealer!
+    print('''Blackjack, by Al Sweigart al@inventwithpython.com
 
     Rules:
       Try to get as close to 21 without going over.
@@ -33,13 +33,23 @@ def main():
 
     money = 5000
     # Main game loop.
-    while True:
+    while True:#Setup loan option
         # Check if the player has run out of money:
-        if money <= 0:
+        if money <= 0:#can add a topup option to improve game
             print("You're broke!")
-            print("Good thing you weren't playing with real money.")
-            print('Thanks for playing!')
-            sys.exit()
+            user_choice = input("Do you need a loan?!? Y/N")
+            if user_choice == "Y" :
+                while True:
+                    user_amount = input("How much do you want?")
+                    if int(user_amount)  <0:
+                        print("invalid loan amount")
+                    else:
+                        break
+                money += int(user_amount)
+            else:
+                print("Good thing you weren't playing with real money.")
+                print('Thanks for playing!')
+                sys.exit()
 
         # Let the player enter their bet for this round:
         print('Money:', money)
@@ -47,9 +57,14 @@ def main():
 
         # Give the dealer and player two cards from the deck each:
         deck = getDeck()
-        dealerHand = [deck.pop(), deck.pop()]
-        playerHand = [deck.pop(), deck.pop()]
-
+        #dealerHand = [deck.pop(), deck.pop()] #Dealer gets one card, then player gets one card.
+        #playerHand = [deck.pop(), deck.pop()]#Dealer gets second card, then player gets second card
+        dealerHand=[]
+        playerHand=[]
+        dealerHand.append(deck.pop())
+        playerHand.append(deck.pop())
+        dealerHand.append(deck.pop())
+        playerHand.append(deck.pop())
         # Handle player actions:
         print('Bet:', bet)
         # Keep looping until player stands or busts.
@@ -67,7 +82,7 @@ def main():
             # Handle the player actions:
             if move == 'D':
                 # Player is doubling down, they can increase their bet:
-                additionalBet = getBet(min(bet, (money - bet)))
+                additionalBet = getBet(min(bet, (money - bet)))#HOMEWOrk, write down meaning of line
                 bet += additionalBet
                 print('Bet increased to {}.'.format(bet))
                 print('Bet:', bet)
@@ -110,7 +125,7 @@ def main():
             if dealerValue > 21:
                 print('Dealer busts! You win ${}!'.format(bet))
                 money += bet
-            elif (playerValue > 21) or (playerValue < dealerValue):
+            elif (playerValue > 21) or (playerValue < dealerValue):#HOMEWOrk, write down meaning of line
                 print('You lost!')
                 money -= bet
             elif playerValue > dealerValue:
@@ -219,7 +234,7 @@ def displayCards(cards):
             # Print the card's front:
             # The card is a tuple data structure.
             rank, suit = card
-            rows[1] += '|{} | '.format(rank.ljust(2))
+            rows[1] += '|{} | '.format(rank.ljust(2))#HOMEWOrk, write down meaning of line
             rows[2] += '| {} |'.format(suit)
             rows[3] += '|_{}| '.format(rank.rjust(2, '_'))
 
